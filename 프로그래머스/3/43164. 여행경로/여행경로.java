@@ -2,7 +2,6 @@ import java.util.*;
 
 class Solution {
     public static  boolean[] visit;
-    public static boolean x;
     public static List<String> result = new LinkedList<>();
     
     public String[] solution(String[][] tickets) {
