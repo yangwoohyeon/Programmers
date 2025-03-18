@@ -2,19 +2,24 @@ import java.util.*;
     
 class Solution {
     public int solution(int[][] sizes) {
-        int answer = 0;
-        int max_h = 0;
-        int max_v = 0;
+        int[] width = new int[sizes.length];
+        int[] height = new int[sizes.length];
         
         for(int i=0; i<sizes.length; i++){
-            int h = Math.min(sizes[i][0],sizes[i][1]);
-            int v = Math.max(sizes[i][0],sizes[i][1]);
-            
-             max_h = Math.max(h,max_h);
-             max_v = Math.max(v,max_v);
+            int x = sizes[i][0];
+            int y = sizes[i][1];
+            if(x>y){
+                width[i]=x;
+                height[i]=y;
+            }
+            else{
+                width[i]=y;
+                height[i]=x;
+            }
         }
-        answer= max_h*max_v;
-        return answer;
+        Arrays.sort(width);
+        Arrays.sort(height);
+        
+        return width[width.length-1] * height[height.length-1];
     }
- 
 }
