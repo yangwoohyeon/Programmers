@@ -2,132 +2,85 @@ import java.util.*;
 
 class Solution {
     public int[] solution(int[] answers) {
-        int[] answer = {};
-        int a1=answer1(answers);
-        int a2=answer2(answers);
-        int a3=answer3(answers);
-        if(a1>a2 && a1>a3){
-            answer = new int[1];
-            answer[0]=1;
-            return answer;
+        int[] x = {1,2,3,4,5};
+        int[] y = {2,1,2,3,2,4,2,5};
+        int[] z = {3,3,1,1,2,2,4,4,5,5};
+        
+        int x_answer = 0;
+        int y_answer = 0;
+        int z_answer = 0;
+        
+        int position_x=0;
+        int posx=0;
+        while(true){
+            if(answers[position_x]==x[posx]){
+                x_answer++;
+            }
+            position_x+=1;
+            posx+=1;
+            
+            if(position_x==answers.length){
+                break;
+            }
+            if(posx==x.length){
+                posx=0;
+            }          
         }
-        else if(a2>a1 && a2>a3){
-            answer = new int[1];
-            answer[0]=2;
-            return answer;
+        
+        int position_y=0;
+        int posy=0;
+        while(true){
+            if(answers[position_y]==y[posy]){
+                y_answer++;
+            }
+            position_y+=1;
+            posy+=1;
+            
+            if(position_y==answers.length){
+                break;
+            }
+            if(posy==y.length){
+                posy=0;
+            }          
         }
-        else if(a3>a1 && a3>a2){
-            answer = new int[1];
-            answer[0]=3;
-            return answer;
+        
+        int position_z=0;
+        int posz=0;
+        while(true){
+            if(answers[position_z]==z[posz]){
+                z_answer++;
+            }
+            position_z+=1;
+            posz+=1;
+            
+            if(position_z==answers.length){
+                break;
+            }
+            if(posz==z.length){
+                posz=0;
+            }          
         }
-        else if(a1==a2 && a1>a3){
-            answer = new int[2];
-            answer[0]=1;
-            answer[1]=2;
-            return answer;
+        
+        int max = Math.max(x_answer,Math.max(y_answer,z_answer));
+        
+        Queue<Integer> queue = new LinkedList<>();
+        
+        if(max==x_answer){
+            queue.add(1);
         }
-        else if(a2==a3 && a2>a1){
-            answer = new int[2];
-            answer[0]=2;
-            answer[1]=3;
-            return answer;
+        if(max==y_answer){
+            queue.add(2);
         }
-        else if(a1==a3 && a1>a2){
-            answer = new int[2];
-            answer[0]=1;
-            answer[1]=3;
-            return answer;
+        if(max==z_answer){
+            queue.add(3);
         }
-        else if(a1==a2 &&a2==a3){
-            answer = new int[3];
-            answer[0]=1;
-            answer[1]=2;
-            answer[2]=3;
-            return answer;
+        
+        int[] answer = new int[queue.size()];
+        int n=0;
+        while(!queue.isEmpty()){
+           answer[n]=queue.poll();
+            n++;
         }
         return answer;
-    }
-    public int answer1(int[] answer){
-        int size = answer.length;
-        int count=0;
-        int num=1;
-        for(int i=0; i<size; i++){
-            if(num==answer[i]){
-                count++;
-            }
-            if(num==5){
-                num=0;
-            }
-            num++;
-        }
-        return count;
-    }
-    public int answer2(int[] answer){
-        int size=answer.length;
-        int count=0;
-        int num=1;
-        for(int i=0; i<size; i++){
-            if(i%2==0){
-                if(answer[i]==2){
-                    count++;
-                }
-            }
-            else{
-                if(num==2){
-                    num+=1;
-                }
-                if(answer[i]==num){
-                    count++;
-                }
-                if(num==5){
-                    num=0;
-                }
-                num++;
-            }
-             
-        }
-        return count;
-    }
-    public int answer3(int[] answer){
-        int size=answer.length;
-        int num=0;
-        int count=0;
-        for(int i=0; i<size; i++){
-            if(num==0 || num==1){
-                if(answer[i]==3){
-                    count++;
-                }
-                num++;
-            }
-            else if(num==2 || num==3){
-                if(answer[i]==1){
-                    count++;
-                }
-                num++;
-            }
-            else if(num==4 || num==5){
-                if(answer[i]==2){
-                    count++;
-                }
-                num++;
-            }
-              else if(num==6 || num==7){
-                if(answer[i]==4){
-                    count++;
-                }
-                num++;
-            }
-             else if(num==8 || num==9){
-                if(answer[i]==5){
-                    count++;
-                }
-                num++;
-                 if(num==10){
-                     num=0;
-                 }
-            }
-        }
-        return count;
     }
 }
