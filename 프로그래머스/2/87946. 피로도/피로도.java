@@ -1,26 +1,28 @@
 import java.util.*;
+
 class Solution {
-    public static int count=0;
-    public static boolean[] visited;
+    static boolean[] visit;
+    static int answer;
     public int solution(int k, int[][] dungeons) {
-        int answer = -1;
-        visited=new boolean[dungeons.length];
+        visit = new boolean[dungeons.length];
+        answer=0;
         dfs(k,dungeons,0);
-        answer=count;
+        
         return answer;
     }
     
-    public void dfs(int k, int[][] dungeons, int clear){
-        count=Math.max(clear,count);
-        
+    public void dfs(int k, int[][] dungeons, int count){
+        answer=Math.max(answer,count);
         for(int i=0; i<dungeons.length; i++){
-            if(!visited[i]){
+            if(!visit[i]){
                 if(k>=dungeons[i][0]){
-                    visited[i]=true;
-                    dfs(k-dungeons[i][1],dungeons,clear+1);
-                    visited[i]=false;
+                    visit[i]=true;
+                    answer=Math.max(count+1,answer);
+                    dfs(k-dungeons[i][1],dungeons,count+1);
+                    visit[i]=false;
                 }
             }
+            
         }
     }
 }
