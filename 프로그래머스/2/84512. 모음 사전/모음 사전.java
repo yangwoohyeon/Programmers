@@ -1,29 +1,26 @@
 import java.util.*;
 
 class Solution {
-    public static int answer;
-    public static List<String> list;
+    static int answer =0;
+    static int n=0;
     public int solution(String word) {
-        list = new ArrayList<>();
-        String[] ch = new String[]{"A","E","I","O","U"};
-        insert(ch,"",0);
-      
-        for(int i=0; i<list.size(); i++){
-            if(list.get(i).equals(word)){
-                answer=i;
-            }
-        }
-        
-        return answer;
+       char[] arr = {'A','E','I','O','U'};
+
+        dfs(word,"",arr);
+        return n;
     }
-    
-    public static void insert(String[] ch,String str,int depth){
-        list.add(str);
-        if(depth==5){
+    public static void dfs(String word, String str,char[] arr){
+        if(word.equals(str)){
+            n=answer;
             return;
         }
-        for(int i=0; i<ch.length; i++){
-            insert(ch,str+ch[i],depth+1);
+        if(str.length() ==5){
+            return;
         }
+        for(int i=0; i<5; i++){
+            answer++;
+            dfs(word,str+arr[i],arr);
+        }
+        return;
     }
 }
